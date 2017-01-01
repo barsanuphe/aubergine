@@ -18,6 +18,7 @@ var testTracks = []struct {
 	position    int
 	title       string
 	albumTitle  string
+	mbReleaseID string
 }{
 	{
 		"../test/Brad_Sucks_-_07_-_Total_Breakdown.mp3",
@@ -27,6 +28,7 @@ var testTracks = []struct {
 		7,
 		"Total Breakdown",
 		"Out of It",
+		"064dbf15-3ef8-3fe2-8b56-3b9287c61e17",
 	},
 	{
 		"../test/Nonima_-_07_-_Cfengine.mp3",
@@ -36,6 +38,7 @@ var testTracks = []struct {
 		7,
 		"Cfengine",
 		"Karmadebt",
+		"91671165-a882-4d21-a9a6-b48129caf6d6",
 	},
 }
 
@@ -67,7 +70,9 @@ func TestAcoustid(t *testing.T) {
 			check.Equal(t.albumTitle, results.Results[0].Recordings[0].Releases[0].Title)
 			check.Equal(t.position, results.Results[0].Recordings[0].Releases[0].Mediums[0].Tracks[0].Position)
 			check.Equal(t.title, results.Results[0].Recordings[0].Releases[0].Mediums[0].Tracks[0].Title)
+			check.Equal(t.mbReleaseID, results.Results[0].Recordings[0].Releases[0].ID)
 		}
+
 	}
 
 }

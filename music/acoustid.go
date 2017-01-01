@@ -18,6 +18,7 @@ const (
 	acoustidURL = "http://api.acoustid.org/v2/lookup"
 )
 
+// AcoustidResults is a struct describing the JSON response from Acoustid
 type AcoustidResults struct {
 	Results []struct {
 		ID         string `json:"id"`
@@ -77,14 +78,14 @@ type AcoustidResults struct {
 
 // AcousticID allows getting information about a track from its contents
 type AcousticID struct {
-	ApiKey      string
+	APIKey      string
 	Fingerprint string
 	Duration    string
 }
 
 // NewAcoustid set up with api key
 func NewAcoustid(key string) *AcousticID {
-	return &AcousticID{ApiKey: key}
+	return &AcousticID{APIKey: key}
 }
 
 // CalculateFingerprint for a given track
@@ -122,7 +123,7 @@ func (a *AcousticID) LookUp() (*AcoustidResults, error) {
 	w := multipart.NewWriter(buffer)
 	errs := []error{}
 	errs = append(errs, w.WriteField("format", "json"))
-	errs = append(errs, w.WriteField("client", a.ApiKey))
+	errs = append(errs, w.WriteField("client", a.APIKey))
 	errs = append(errs, w.WriteField("duration", a.Duration))
 	errs = append(errs, w.WriteField("fingerprint", a.Fingerprint))
 	errs = append(errs, w.WriteField("meta", "recordings releases tracks"))
