@@ -12,20 +12,20 @@ const (
 
 // MusicBrainzReleaseResults is a struct describing the JSON response for a MusicBreinz query about a speficif release.
 type MusicBrainzReleaseResults struct {
-	Artist_credit []struct {
+	ArtistCredit []struct {
 		Artist struct {
 			Disambiguation string `json:"disambiguation"`
 			ID             string `json:"id"`
 			Name           string `json:"name"`
-			Sort_name      string `json:"sort-name"`
+			SortName       string `json:"sort-name"`
 		} `json:"artist"`
 		Joinphrase string `json:"joinphrase"`
 		Name       string `json:"name"`
 	} `json:"artist-credit"`
-	Asin              string `json:"asin"`
-	Barcode           string `json:"barcode"`
-	Country           string `json:"country"`
-	Cover_art_archive struct {
+	Asin            string `json:"asin"`
+	Barcode         string `json:"barcode"`
+	Country         string `json:"country"`
+	CoverArtArchive struct {
 		Artwork  bool `json:"artwork"`
 		Back     bool `json:"back"`
 		Count    int  `json:"count"`
@@ -35,32 +35,32 @@ type MusicBrainzReleaseResults struct {
 	Date           string `json:"date"`
 	Disambiguation string `json:"disambiguation"`
 	ID             string `json:"id"`
-	Label_info     []struct {
-		Catalog_number string `json:"catalog-number"`
-		Label          struct {
+	LabelInfo      []struct {
+		CatalogNumber string `json:"catalog-number"`
+		Label         struct {
 			Disambiguation string      `json:"disambiguation"`
 			ID             string      `json:"id"`
-			Label_code     interface{} `json:"label-code"`
+			LabelCode      interface{} `json:"label-code"`
 			Name           string      `json:"name"`
-			Sort_name      string      `json:"sort-name"`
+			SortName       string      `json:"sort-name"`
 		} `json:"label"`
 	} `json:"label-info"`
-	Packaging      string `json:"packaging"`
-	Packaging_id   string `json:"packaging-id"`
-	Quality        string `json:"quality"`
-	Release_events []struct {
+	Packaging     string `json:"packaging"`
+	PackagingID   string `json:"packaging-id"`
+	Quality       string `json:"quality"`
+	ReleaseEvents []struct {
 		Area struct {
-			Disambiguation   string   `json:"disambiguation"`
-			ID               string   `json:"id"`
-			Iso_3166_1_codes []string `json:"iso-3166-1-codes"`
-			Name             string   `json:"name"`
-			Sort_name        string   `json:"sort-name"`
+			Disambiguation string   `json:"disambiguation"`
+			ID             string   `json:"id"`
+			Iso31661Codes  []string `json:"iso-3166-1-codes"`
+			Name           string   `json:"name"`
+			SortName       string   `json:"sort-name"`
 		} `json:"area"`
 		Date string `json:"date"`
 	} `json:"release-events"`
-	Status              string `json:"status"`
-	Status_id           string `json:"status-id"`
-	Text_representation struct {
+	Status             string `json:"status"`
+	StatusID           string `json:"status-id"`
+	TextRepresentation struct {
 		Language string `json:"language"`
 		Script   string `json:"script"`
 	} `json:"text-representation"`

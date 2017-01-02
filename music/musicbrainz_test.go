@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"testing"
 
+	"strings"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,17 +19,17 @@ var testMBReleases = []struct {
 }{
 	{
 		"Billie Holiday",
-		"Solitude",
-		"9b7a83cd-15c2-4d2f-9eea-da740c033517",
-		"Verve",
-		"314 519 810-2",
+		"Lady Sings the Blues",
+		"9e4bfa2d-af1d-4f64-a495-88fe2144cabb",
+		"PolyGram",
+		"833 770-2",
 	},
 	{
 		"Radiohead",
 		"Kid A",
-		"0e8a1994-f0a7-481d-9be2-6c2f80e14de5",
-		"XL Recordings",
-		"XLDA782",
+		"a3b0e5eb-fa3b-3e4d-b5e6-d0881984a183",
+		"Parlophone",
+		"527 7532",
 	},
 }
 
@@ -44,7 +46,7 @@ func TestMusicBrainz(t *testing.T) {
 
 		check.Equal(t.mbReleaseID, a.Info.ID)
 		check.Equal(t.albumTitle, a.Info.Title)
-		check.Equal(0, len(a.Info.Label_info)) // no label info, CC material
+		check.Equal(0, len(a.Info.LabelInfo)) // no label info, CC material
 	}
 
 	for _, t := range testMBReleases {
@@ -55,11 +57,12 @@ func TestMusicBrainz(t *testing.T) {
 		check.Nil(err, "Unexpected error getting MusicBrainz info")
 
 		check.Equal(t.mbReleaseID, a.Info.ID)
-		check.Equal(t.albumTitle, a.Info.Title)
-		check.Equal(t.artist, a.Info.Artist_credit[0].Name)
-		check.NotEqual(0, len(a.Info.Label_info), "Release should have label info")
-		check.Equal(t.expectedCatalogNumber, a.Info.Label_info[0].Catalog_number)
-		check.Equal(t.expectedLabel, a.Info.Label_info[0].Label.Name)
+		check.Equal(strings.ToLower(t.albumTitle), strings.ToLower(a.Info.Title))
+		check.Equal(t.artist, a.Info.ArtistCredit[0].Name)
+		check.NotEqual(0, len(a.Info.LabelInfo), "Release should have label info")
+		check.Equal(t.expectedCatalogNumber, a.Info.LabelInfo[0].CatalogNumber)
+		check.Equal(t.expectedLabel, a.Info.LabelInfo[0].Label.Name)
+		fmt.Println(a.Info.LabelInfo[0].Label.Disambiguation)
 	}
 
 }
